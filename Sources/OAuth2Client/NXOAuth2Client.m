@@ -37,11 +37,11 @@ NSString * const NXOAuth2ClientConnectionContextTokenRefresh = @"tokenRefresh";
 
 #pragma mark Lifecycle
 
-- (id)initWithClientID:(NSString *)aClientId
-          clientSecret:(NSString *)aClientSecret
-          authorizeURL:(NSURL *)anAuthorizeURL
-              tokenURL:(NSURL *)aTokenURL
-              delegate:(NSObject<NXOAuth2ClientDelegate> *)aDelegate;
+- (instancetype)initWithClientID:(NSString *)aClientId
+                    clientSecret:(NSString *)aClientSecret
+                    authorizeURL:(NSURL *)anAuthorizeURL
+                        tokenURL:(NSURL *)aTokenURL
+                        delegate:(NSObject<NXOAuth2ClientDelegate> *)aDelegate;
 {
     return [self initWithClientID:aClientId
                      clientSecret:aClientSecret
@@ -53,14 +53,14 @@ NSString * const NXOAuth2ClientConnectionContextTokenRefresh = @"tokenRefresh";
                          delegate:aDelegate];
 }
 
-- (id)initWithClientID:(NSString *)aClientId
-          clientSecret:(NSString *)aClientSecret
-          authorizeURL:(NSURL *)anAuthorizeURL
-              tokenURL:(NSURL *)aTokenURL
-           accessToken:(NXOAuth2AccessToken *)anAccessToken
-         keyChainGroup:(NSString *)aKeyChainGroup
-            persistent:(BOOL)shouldPersist
-              delegate:(NSObject<NXOAuth2ClientDelegate> *)aDelegate;
+- (instancetype)initWithClientID:(NSString *)aClientId
+                    clientSecret:(NSString *)aClientSecret
+                    authorizeURL:(NSURL *)anAuthorizeURL
+                        tokenURL:(NSURL *)aTokenURL
+                     accessToken:(NXOAuth2AccessToken *)anAccessToken
+                   keyChainGroup:(NSString *)aKeyChainGroup
+                      persistent:(BOOL)shouldPersist
+                        delegate:(NSObject<NXOAuth2ClientDelegate> *)aDelegate;
 {
     return [self initWithClientID:aClientId
                      clientSecret:aClientSecret
@@ -73,15 +73,15 @@ NSString * const NXOAuth2ClientConnectionContextTokenRefresh = @"tokenRefresh";
                          delegate:aDelegate];
 }
 
-- (id)initWithClientID:(NSString *)aClientId
-          clientSecret:(NSString *)aClientSecret
-          authorizeURL:(NSURL *)anAuthorizeURL
-              tokenURL:(NSURL *)aTokenURL
-           accessToken:(NXOAuth2AccessToken *)anAccessToken
-             tokenType:(NSString *)aTokenType
-         keyChainGroup:(NSString *)aKeyChainGroup
-            persistent:(BOOL)shouldPersist
-              delegate:(NSObject<NXOAuth2ClientDelegate> *)aDelegate;
+- (instancetype)initWithClientID:(NSString *)aClientId
+                    clientSecret:(NSString *)aClientSecret
+                    authorizeURL:(NSURL *)anAuthorizeURL
+                        tokenURL:(NSURL *)aTokenURL
+                     accessToken:(NXOAuth2AccessToken *)anAccessToken
+                       tokenType:(NSString *)aTokenType
+                   keyChainGroup:(NSString *)aKeyChainGroup
+                      persistent:(BOOL)shouldPersist
+                        delegate:(NSObject<NXOAuth2ClientDelegate> *)aDelegate;
 {
     NSAssert(aTokenURL != nil && anAuthorizeURL != nil, @"No token or no authorize URL");
     self = [super init];
@@ -433,10 +433,8 @@ NSString * const NXOAuth2ClientConnectionContextTokenRefresh = @"tokenRefresh";
     self.authenticating = YES;
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       @"assertion", @"grant_type",
+                                       anAssertionType.absoluteString, @"grant_type",
                                        clientId, @"client_id",
-                                       clientSecret, @"client_secret",
-                                       anAssertionType.absoluteString, @"assertion_type",
                                        anAssertion, @"assertion",
                                        nil];
     if (self.desiredScope) {
