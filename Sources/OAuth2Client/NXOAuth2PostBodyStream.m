@@ -30,7 +30,7 @@
 {
     self = [self init];
     if (self) {
-        srandom(time(NULL));
+        srandom((unsigned)time(NULL));
         boundary = [[NSString alloc] initWithFormat:@"------------nx-oauth2%d", rand()];
         numBytesTotal = 0;
         streamIndex = 0;
